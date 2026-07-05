@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Вспышка • Меню</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #fcf7f0;
+            color: #2d1f14;
+            padding: 24px 16px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* шапка */
+        .header {
+            text-align: center;
+            padding: 20px 0 12px;
+            border-bottom: 2px dashed #e4c9b0;
+        }
+
+        .header h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #d48c5a, #b5653b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #a67b64;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .summer-badge {
+            display: inline-block;
+            margin-top: 8px;
+            background: #fde5d4;
+            padding: 6px 24px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #bc6c3b;
+            border: 1px solid #eccbb6;
+            letter-spacing: 1px;
+        }
+
+        /* категории */
+        .section {
+            margin-top: 32px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #f0d5c0;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            color: #3f281c;
+        }
+
+        .section-title span {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #b28b76;
+        }
+
+        /* карточка блюда */
+        .item {
+            background: white;
+            border-radius: 20px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s ease;
+            border: 1px solid #f1e3d8;
+        }
+
+        .item:hover {
+            transform: scale(1.01);
+            border-color: #dbb8a4;
+            box-shadow: 0 8px 18px rgba(180, 120, 90, 0.08);
+        }
+
+        .item-left {
+            flex: 1;
+            padding-right: 12px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2d1f14;
+        }
+
+        .item-desc {
+            font-size: 0.82rem;
+            color: #8f6f5b;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        .item-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #bc6c3b;
+            white-space: nowrap;
+            background: #fcf3ec;
+            padding: 4px 14px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* напитки */
+        .drink-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            background: white;
+            padding: 16px 18px;
+            border-radius: 20px;
+            border: 1px solid #f1e3d8;
+        }
+
+        .drink-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            padding: 4px 0;
+            border-bottom: 1px dotted #efe1d6;
+        }
+
+        .drink-item:last-child {
+            border-bottom: none;
+        }
+
+        .drink-name {
+            color: #3f281c;
+        }
+
+        .drink-price {
+            font-weight: 600;
+            color: #bc6c3b;
+        }
+
+        /* доп */
+        .note {
+            margin-top: 28px;
+            padding: 16px 20px;
+            background: #fcf3ec;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #6f4f3a;
+            text-align: center;
+            border: 1px solid #eedacb;
+            line-height: 1.5;
+        }
+
+        .note strong {
+            color: #b5653b;
+        }
+
+        .footer {
+            margin-top: 32px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #b28b76;
+            letter-spacing: 1px;
+        }
+
+        /* адаптив */
+        @media (max-width: 480px) {
+            .header h1 { font-size: 2.2rem; }
+            .drink-grid { grid-template-columns: 1fr; }
+            .item { padding: 12px 14px; }
+        }
+
+        /* анимация при загрузке */
+        .item, .drink-grid, .section-title {
+            opacity: 0;
+            animation: fadeUp 0.4s ease forwards;
+        }
+        .item:nth-child(1) { animation-delay: 0.02s; }
+        .item:nth-child(2) { animation-delay: 0.04s; }
+        .item:nth-child(3) { animation-delay: 0.06s; }
+        .item:nth-child(4) { animation-delay: 0.08s; }
+        .item:nth-child(5) { animation-delay: 0.10s; }
+        .item:nth-child(6) { animation-delay: 0.12s; }
+        .item:nth-child(7) { animation-delay: 0.14s; }
+        .item:nth-child(8) { animation-delay: 0.16s; }
+        .drink-grid { animation-delay: 0.20s; }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(8px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>✦ ВСПЫШКА ✦</h1>
+    <p>завтраки · обеды · уют</p>
+    <div class="summer-badge">☀️ ЛЕТО 2026</div>
+</div>
+
+<!-- ЗАВТРАКИ -->
+<div class="section">
+    <div class="section-title">🥞 Завтраки <span>до 12:00</span></div>
+
+    <div class="item"><div class="item-left"><div class="item-name">Картофельный драник с лососем</div></div><div class="item-price">590</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Бенедикт с лососем</div></div><div class="item-price">590</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Крок мадам</div></div><div class="item-price">480</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Утренний бургер с бататом фри<br><span class="item-desc">английский мафин, сыр чаддер, котлета из говядины</span></div></div><div class="item-price">720</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Сырники с ягодой и ванильным кремом</div></div><div class="item-price">560</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Мини оладьи креп Сюзет</div></div><div class="item-price">490</div></div>
+</div>
+
+<!-- ОСНОВНОЕ -->
+<div class="section">
+    <div class="section-title">🍽 Основное</div>
+
+    <div class="item"><div class="item-left"><div class="item-name">Тёплый зелёный салат с курицей</div></div><div class="item-price">550</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Ромейн с печёным лососем</div></div><div class="item-price">550</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Салат страчателла, томаты, песто</div></div><div class="item-price">620</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Борщ</div></div><div class="item-price">520</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Окрошка</div></div><div class="item-price">470</div></div>
+
+    <div class="item"><div class="item-left"><div class="item-name">Паста карбонара</div></div><div class="item-price">590</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Паста с говядиной и перечным демиглас</div></div><div class="item-price">630</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Паста с томатами и страчателлой</div></div><div class="item-price">570</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Паста с креветкой том ям</div></div><div class="item-price">670</div></div>
+
+    <div class="item"><div class="item-left"><div class="item-name">Куриный шницель с романо и пармезаном</div></div><div class="item-price">650</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Стейк лосося, картофельное пюре, цукини</div></div><div class="item-price">980</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Бефстроганов с картофельным пюре</div></div><div class="item-price">670</div></div>
+</div>
+
+<!-- ПИЦЦА -->
+<div class="section">
+    <div class="section-title">🍕 Пицца на римской основе</div>
+    <div class="item"><div class="item-left"><div class="item-name">Пеперони</div></div><div class="item-price">940</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Маргарита со страчателлой</div></div><div class="item-price">920</div></div>
+</div>
+
+<!-- ЛЕТНИЕ НАПИТКИ -->
+<div class="section">
+    <div class="section-title">🍹 Летние напитки <span>400 мл</span></div>
+    <div class="drink-grid">
+        <div class="drink-item"><span class="drink-name">Бамбл</span><span class="drink-price">420</span></div>
+        <div class="drink-item"><span class="drink-name">Эспрессо-тоник</span><span class="drink-price">410</span></div>
+        <div class="drink-item"><span class="drink-name">Лимонад клубника-мята</span><span class="drink-price">390</span></div>
+        <div class="drink-item"><span class="drink-name">Лимонад ежевика-базилик</span><span class="drink-price">390</span></div>
+        <div class="drink-item"><span class="drink-name">Лимонад габа-манго</span><span class="drink-price">390</span></div>
+    </div>
+</div>
+
+<!-- КОФЕ -->
+<div class="section">
+    <div class="section-title">☕ Кофе</div>
+    <div class="drink-grid">
+        <div class="drink-item"><span class="drink-name">Фильтр 200/300 мл</span><span class="drink-price">240 / 280</span></div>
+        <div class="drink-item"><span class="drink-name">Американо 300 мл</span><span class="drink-price">280</span></div>
+        <div class="drink-item"><span class="drink-name">Капучино 200/300 мл</span><span class="drink-price">290 / 340</span></div>
+        <div class="drink-item"><span class="drink-name">Латте 300 мл</span><span class="drink-price">340</span></div>
+        <div class="drink-item"><span class="drink-name">Раф 300 мл</span><span class="drink-price">390</span></div>
+        <div class="drink-item"><span class="drink-name">Флэт-уайт 200 мл</span><span class="drink-price">320</span></div>
+    </div>
+</div>
+
+<!-- ПРИМЕЧАНИЕ -->
+<div class="note">
+    <strong>☕</strong> Мы готовим для вас горячие напитки температурой 60–65 °C.<br>
+    Если желаете <strong>прохладный</strong> напиток — пожалуйста, предупредите при заказе.
+</div>
+
+<div class="footer">
+    ✦ ВСПЫШКА · ЛЕТО 2026 ✦
+</div>
+
+</body>
+</html>
